@@ -1,0 +1,7 @@
+#Matlab
+
+#PSoC
+*.cywrk
+*.cywrk.*
+*.cydsn/*
+!*.cydsn/main.c
