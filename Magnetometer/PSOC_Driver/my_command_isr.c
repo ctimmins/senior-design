@@ -16,6 +16,7 @@ extern uint8 Command_Received;
 extern uint8 MAG_DataRdy_Flag;
 extern uint8 IncomingData_Flag;
 extern uint8 ReadyForCommand_Flag; // Flag to see if a procedure is already in progress
+extern uint8 Command_Buffer;
 extern uint8 DataInBuffer_Global[];
 extern uint8 *DataInPtr_Global;
 
@@ -86,20 +87,24 @@ CY_ISR(XBeeISR) //Interrupt for recieved data/commands
 			}
 			IncomingData_Flag = 0;
 		}
-		else /*If a procedure IS already in progress and NOT waiting for furthur data. [DENY or STORE?] and return BUSY msg to MATLAB */
+		if((MAG_DataRdy_Flag!=0)&&(Command_Buffer==0))
+		{
+			Command_Buffer = XBee_UART_GetChar();
+		}
+		else //ERROR: BUSY (If a procedure IS already in progress and NOT waiting for furthur data. [DENY or STORE?] and return BUSY msg to MATLAB)
 		{
 			// Possibly add a step that stores the CMD and executes after
 			LCD_Position(1,0);
 			LCD_PrintString("E:BSY");			
-			XBee_UART_ClearTxBuffer();
+			//XBee_UART_ClearTxBuffer();
 			XBee_UART_PutChar(CMD_O_BUSY); /* SEND ERROR MSG TO MATLAB*/
-			//RESET SYSTEM SINCE IF MATLAB HAS SENT CMD BEFORE RECEIVING CONFIRMATION, THERE WILL BE A PROBLEM ANYWAYS WHEN IT IS SENT LATER
-			XBee_UART_ClearRxBuffer();
-			I2C_MasterClearReadBuf();
-			I2C_MasterClearWriteBuf();
-			Command_Received = 0;
-			IncomingData_Flag = 0;
-			ReadyForCommand_Flag = 1;
+			
+			//XBee_UART_ClearRxBuffer();
+			//I2C_MasterClearReadBuf();
+			//I2C_MasterClearWriteBuf();
+			//Command_Received = 0;
+			//IncomingData_Flag = 0;
+			//ReadyForCommand_Flag = 1;
 		}	
 	}   
 } /*End of XBeeISR Code*/
@@ -117,7 +122,8 @@ CY_ISR(INT1PinISR) // Only clears interrupt and sets flag. Allows any currently 
 	
     //set INT1 Flag
 	LCD_Position(1,0);
-	LCD_PrintString("DRDY1");	
+	LCD_PrintString("DRDY1");
+	CyDelay(2000);
     MAG_DataRdy_Flag = 1;
 }
 
