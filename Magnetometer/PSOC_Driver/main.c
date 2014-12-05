@@ -25,8 +25,6 @@ uint8 Global_ReadBuffer[8] = {0};
 uint8 *Global_ReadPtr = Global_ReadBuffer;
 uint8 DataInBuffer_Global[8] = {0};
 uint8 *DataInPtr_Global = DataInBuffer_Global;
-//uint8 WaitForDataRead_Flag;
-uint8 Command_Buffer;
 //#define CMD_I_RM_MAGDATA_D		(0x34u)
 
 
@@ -43,17 +41,15 @@ int main()
 	ReadyForCommand_Flag = 1;
 	IncomingData_Flag = 0;
 	StatusError_Flag = 0;
-	//WaitForDataRead_Flag = 0;
-	Command_Buffer = 0;
 	
 	// INITIALIZE ISRs
 	InitXBee_Isr();
-	//InitINT1_Isr(); // IF INT1 TRIGGERS WHEN NOT IN ACTIVE MODE, MOVE INITIATION CODE FOR SETTING ACTIVE.
-	//INT1_isr_Start();
+	InitINT1_Isr(); // IF INT1 TRIGGERS WHEN NOT IN ACTIVE MODE, MOVE INITIATION CODE FOR SETTING ACTIVE.
 	
 	XBee_UART_ClearRxBuffer();
 	XBee_UART_ClearTxBuffer();
-	CyDelay(2000);
+	SetCtrlReg1Default();
+	SetCtrlReg2Default();
 	LCD_ClearDisplay();
 	LCD_Position(0,0);
 	LCD_PrintString("MAG DRIVER:");
@@ -61,42 +57,21 @@ int main()
 	LCD_PrintString("[ERR]");
 	LCD_Position(1,7);
 	LCD_PrintString("[I2C]");
-
+	CyDelay(1000);
 	uint8 status = 0;
-	status = SetCtrlReg1Default();
-	status |= SetCtrlReg2Default();
-	if(status !=0)
-	{
-		LCD_ClearDisplay();
-		LCD_Position(0,0);
-		LCD_PrintInt8(status);
-		status = 0;
-	}
-	uint8 pin_status = 0;
 	    
     for(;;)
     {
-		pin_status = INT1_Pin_Read();
-		pin_status |= MAG_DataRdy_Flag;
-		if(pin_status)
-		{
-			MAG_DataRdy_Flag = pin_status;
-			if(ReadyForCommand_Flag!=0)
-			{
-				Command_Received = CMD_I_RM_MAGDATA;
-				ReadyForCommand_Flag = 0;
-			}	
-		}
-
 		if(Command_Received != 0)
 		{
 			LCD_ClearDisplay();
-			//XBee_UART_ClearTxBuffer();
-			//XBee_UART_ClearRxBuffer();			
+			XBee_UART_ClearTxBuffer();
+			XBee_UART_ClearRxBuffer();			
 			switch (Command_Received){
 				case CMD_I_RM_MAGDATA: // CMD_I_RM_MAGDATA = 34
 				{
 					status = ReadMagData(Global_ReadPtr);
+
 					if(status == 0)
 					{
 						CyDelay(500);
@@ -104,21 +79,12 @@ int main()
 						//LED_out_Write(0);
 						CyDelay(500);
 						XBee_UART_PutArray(Global_ReadPtr,ARRAY_SIZE_MAG_DATA);
-						CyDelay(1000);					
-						//WaitForDataRead_Flag = 0;
+						CyDelay(1000);
+						LED_out_Write(0);
+						Command_Received = 0;
+						ReadyForCommand_Flag = 1;
+						IncomingData_Flag = 0;
 						MAG_DataRdy_Flag = 0;
-						if(Command_Buffer!=0)
-						{
-							Command_Received = Command_Buffer;
-							Command_Buffer = 0;
-							//ReadyForCommand_Flag = 0; //Dont toggle flag
-						}
-						else
-						{
-							Command_Received = 0;
-							ReadyForCommand_Flag = 1;
-							LED_out_Write(0);
-						}
 					}					
 					else 
 					{
@@ -590,7 +556,7 @@ int main()
 					status = ResetMag();
 					if(status == 0) //if the write was a success
 					{
-						CyDelay(1000); //LET MAGNETOMETER RESET PROCEDURE FINISH
+						CyDelay(500);
 						XBee_UART_PutChar(Command_Received);//Returns command received from MATLAB as confirmation
 						LED_out_Write(0); //Turns off LED
 						Command_Received = 0; //Clears the Command
@@ -693,20 +659,19 @@ int main()
 			} //END OF SWITCH-CASE
 		}//end of IF statement encasing switch-case
 		
-		/*else // if(Command_Received == 0)
+		else // if(Command_Received == 0)
 		{
-			if((MAG_DataRdy_Flag==1) && (WaitForDataRead_Flag==0))
+			if(MAG_DataRdy_Flag)
 			{
 				//May change CMD_O_MAGDATARDY to simply be the same as CMD_I_RM_MAGDATA.
-				//XBee_UART_ClearTxBuffer();
-				//LCD_ClearDisplay();
+				XBee_UART_ClearTxBuffer();
+				XBee_UART_ClearRxBuffer();
+				LCD_ClearDisplay();
 				LCD_Position(1,0);
 				LCD_PrintString("DRDY2");
 				XBee_UART_PutChar(CMD_O_MAGDATARDY);// CMD_O_MAGDATARDY = 55
-				WaitForDataRead_Flag = 1; //Prevents constant resending of notification to MATLAB
-				INT1_isr_Disable();
 			}
-		}*/
+		}
 	}//END OF FOR LOOP	
 		
 }//END OF MAIN

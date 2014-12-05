@@ -151,18 +151,19 @@ uint8 SetContinuousMode()
 {
 	uint8 temp_value = 0;
 	/* Use the cotrol register read function to get the current state */
-	uint8 status = SetAutoResetOn();
-	status |= ReadCtrlReg1(&temp_value);
+	uint8 status = ReadCtrlReg1(&temp_value);
 	//CyDelay(100);	
 	
 	/* Set the 2 LSB bits to 0. We are going to replace these values with the new mode bits. We preserve the 6 MSB bits */
 	temp_value &= 0xFC; /* 0xFC = 0b1111 1100 in binary. Anding preservs the 6 MSB bits */
 	temp_value |= CTRL_REG1_CONTINUOUS; /* Oring with the CONSTANT set the 2 LSB bits and preservs the 6 MSB bits */
 	
-	//status |= SetStandbyMode();
-
+	status |= SetStandbyMode();
+ 
 	/* Write the new control register 1 state to control register 1. Retrun the error status */
 	status |= WriteCtrlReg1(temp_value);
+	
+	status |= SetAutoResetOn();
 	return status;
 
 }
