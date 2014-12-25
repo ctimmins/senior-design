@@ -16,11 +16,11 @@ To quantify the microclimates within an agricultural setting. With a network of 
 * Marketing video?
 
 ###MAIN COMPONENTS
-* PSoC4 - 32 bit ARM Cortex M0 based programmable system on chip a.k.a. the brains of each node
-* Moisture Sensor - Non-capacitive soil moisture sensor will give a moisture profile at 6 different soil depths per node
-* XBee Radio - Wireless communication system to relay data to ConnectPort
-* ConnectPort - The bridge between collected data and cloud storage/web application
-* Analytics Framework - TBD
+* **PSoC4** - 32 bit ARM Cortex M0 based programmable system on chip a.k.a. the brains of each node
+* **Moisture Sensor** - Non-capacitive soil moisture sensor will give a moisture profile at 6 different soil depths per node
+* **XBee Radio** - Wireless communication system to relay data to ConnectPort
+* **ConnectPort** - The bridge between collected data and cloud storage/web application
+* **Analytics Framework** - TBD
 
 
 
