@@ -5,3 +5,6 @@
 *.cywrk.*
 *.cydsn/
 !*.cydsn/main.c
+
+#Documents and PDF's
+./Documents/
