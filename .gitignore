@@ -1,10 +1,8 @@
-#Matlab
+#--Matlab--#
 
-#PSoC
-*.cywrk
-*.cywrk.*
-*.cydsn/
-!*.cydsn/main.c
+#--PSoC--#
+#!*.cydsn/main.c
+**.Bundle*/
 
-#Documents and PDF's
+#--Documents and PDF's--#
 
