@@ -20,6 +20,7 @@ To quantify the microclimates within an agricultural setting. With a network of 
 * **Moisture Sensor** - Non-capacitive soil moisture sensor will give a moisture profile at 6 different soil depths per node
 * **XBee Radio** - Wireless communication system to relay data to ConnectPort
 * **ConnectPort** - The bridge between collected data and cloud storage/web application
+* **Infrared Sensor** - Gives IR profile of transpiring leaves to infer water/sugar content through rate of change in temperature
 * **Analytics Framework** - TBD
 
 
