@@ -1,2 +1,3 @@
 # Files to ignore #
-scripts/config.js
+config.*
+firebase.json

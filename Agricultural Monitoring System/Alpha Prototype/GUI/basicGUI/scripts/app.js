@@ -1,16 +1,20 @@
 var app = {
 
 	initialize: function() {
-		app.baseURL = 'http://login.etherios.com';
+		app.baseURL = 'https://login.etherios.com';
 		app.firebase = new Firebase(config.firebaseURL);
-
+		console.log('this is it:');
+		console.log(Digi.listDataStreams('ctimmins', 'T3am#winning'));
 	},
 
 };
 
+/**
+ * Digi Device Cloud and ConnectPort Utility functions
+ */
 var Digi = {
 
-	baseURL: 'http://login.etherios.com',
+	baseURL: 'https://login.etherios.com',
 
 	/**
 	 * check status of ConnectPort(s)
@@ -22,7 +26,7 @@ var Digi = {
 	checkStatus: function (deviceID, user, pw) {
 
 		var headers = {
-			'Authorization': 'Basic ' + user +':' + pw,
+			'Authorization': 'Basic ' + btoa(user +':' + pw),
 			'Content-Type': 'text/xml; charset="UTF-8"'
 		}
 
@@ -40,11 +44,6 @@ var Digi = {
 	 * @return {xml}
 	 */
 	getDeviceInfo: function (deviceID, user, pw) {
-		
-		var headers = {
-			'Authorization': 'Basic ' + user +':' + pw,
-			'Content-Type': 'text/xml; charset="UTF-8"'
-		}
 
 	},
 
@@ -57,17 +56,30 @@ var Digi = {
 	 */
 	getSettings: function (deviceID, user, pw) {
 		var headers = {
-			'Authorization': 'Basic ' + user +':' + pw,
+			'Authorization': 'Basic ' + btoa(user +':' + pw),
 			'Content-Type': 'text/xml; charset="UTF-8"'
 		}
 
 		var payload = Digi.message.querySetting(deviceID);
+
+		Digi.post(Digi.baseURL+'/ws/sci', payload, headers);
+	},
+
+	listDataStreams: function (user, pw) {
+		var headers = {
+			'Authorization': 'Basic ' + btoa(user +':' + pw),
+			'Data-Type': 'json'
+		}
+
+		var res = Digi.get(Digi.baseURL+'/ws/v1/streams/inventory', headers);
+
+		return res;
 	},
 
 	getAllData: function () {
 
 	},
-
+	
 	getOneDataStream: function (deviceID) {
 
 	},
@@ -86,19 +98,40 @@ var Digi = {
 					xhr.setRequestHeader(key, val);
 				});
 				xhr.setRequestHeader('Content-Length', data.length);
-			}
+			},
 			type: "POST",
 			url: url,
 			processData: false,
 			data: data
 		});
-	}
+	},
+
+	/**
+	 * HTTP GET method for device cloud with custom headers
+	 * @param  {string} url     url for GET request
+	 * @param  {string} headers custom headers for authentication
+	 * @return {[type]}         [description]
+	 */
+	get: function(url, headers) {
+		$.ajax({
+			beforeSend: function (xhr) {
+				$.each(headers, function (key, val) {
+					xhr.setRequestHeader(key, val);
+				});
+			},
+			type: "GET",
+			url: url
+		})
+		.done(function(data) {
+			return data;
+		});
+	},
 
 	/**
 	 * various messages for digi device cloud commands
 	 * @type {Object}
 	 */
-	message = {
+	message: {
 
 		queryState: function (target) {
 			var message = 
@@ -132,5 +165,5 @@ var Digi = {
 			return message;
 		},
 
-	};
+	}
 }
