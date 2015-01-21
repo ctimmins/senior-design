@@ -7,8 +7,21 @@ class Digi:
 		#self.device_id = "00000000-00000000-00409DFF-FF78D746"
 		self.baseURL = "https://login.etherios.com"
 
-	def listDataStreams(self):
+	def listAllStreams(self):
 		return requests.get(self.baseURL + '/ws/v1/streams/inventory', auth=(self.user, self.pw))
+
+	def getOneStream(self, stream_id):
+		return requests.get(self.baseURL + '/ws/v1/streams/inventory/' + stream_id, auth=(self.user, self.pw))
+
+	def createStream(self, description, stream_id, data_type):
+		payload = {'description': description, 'id': stream_id, 'type': data_type}
+		return requests.post(self.baseURL + 'ws/v1/streams/inventory', auth=(self.user, self.pw), json=payload)
+
+	# def getStreamHistory(self, stream_id):
+	# 	return requests.get
+
+	def deleteStream(self, stream_id):
+		return requests.delete(self.baseURL + '/ws/v1/streams/inventory/' + stream_id, auth=(self.user, self.pw))	
 
 	def getDeviceStatus(self, device_id):
 		return requests.post(self.baseURL + '/ws/sci', auth=(self.user, self.pw), data=self.queryStateCmd(device_id))
@@ -23,9 +36,9 @@ class Digi:
 		return requests.post(self.baseURL + '/ws/sci', auth=(self.user, self.pw), data = self.setXbeeCmd(addr, cmd))
 
 
-	##################	
-	## RCI commands ##
-	##################
+	########################################	
+	######### RCI Command Strings ##########
+	########################################
 	def queryStateCmd(self, device_id):
 		return """\
 			<sci_request version="1.0"> 
