@@ -16,6 +16,12 @@ class Digi:
 	def getDeviceSettings(self, device_id):
 		return requests.post(self.baseURL + '/ws/sci', auth=(self.user, self.pw), data=self.querySettingCmd(device_id))
 	
+	def setXbeeSettings(self, addr, cmd, val):
+		return requests.post(self.baseURL + '/ws/sci', auth=(self.user, self.pw), data = self.setXbeeCmd(addr, cmd, val))
+
+	def getXbeeSettings(self, addr, cmd):
+		return requests.post(self.baseURL + '/ws/sci', auth=(self.user, self.pw), data = self.setXbeeCmd(addr, cmd))
+
 
 	##################	
 	## RCI commands ##
@@ -48,11 +54,37 @@ class Digi:
 			</sci_request>
 			""" % (device_id)
 
+	def setXbeeCmd(self, addr, cmd, val):
+		return """\
+			<sci_request version="1.0">
+			  <data_service>
+			    <targets>
+			      <device id="%s"/>
+			    </targets>
+			    <requests>
+			      <device_request target_name="xig">
+			        &lt;at hw_address="%s" command="%s" value="%s" /&gt;
+			      </device_request>
+			    </requests>
+			  </data_service>
+			</sci_request>
+			""" % (device_id, addr, cmd, val)
+
+	def getXbeeCmd(self, addr, cmd):
+		return """\
+			<sci_request version="1.0">
+			  <data_service>
+			    <targets>
+			      <device id="%s"/>
+			    </targets>
+			    <requests>
+			      <device_request target_name="xig">
+			        &lt;at hw_address="%s" command="%s"/&gt;
+			      </device_request>
+			    </requests>
+			  </data_service>
+			</sci_request>
+			""" % (device_id, addr, cmd, val)
 
 
-		
 			
-			
-
-	 
-
