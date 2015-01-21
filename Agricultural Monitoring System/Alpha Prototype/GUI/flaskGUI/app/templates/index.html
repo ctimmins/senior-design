@@ -1,0 +1,15 @@
+<html>
+  <head>
+    <title>AgMonster</title>
+  </head>
+  <body>
+    <h1>Well Hello, {{user.name}}!</h1>
+    {% for obj in list %}
+      {% for key in obj %}
+      <div>
+        <p>{{key}}: {{obj.get(key)}}</p>
+      </div>
+      {% endfor %}
+    {% endfor %}
+  </body>
+</html> 
