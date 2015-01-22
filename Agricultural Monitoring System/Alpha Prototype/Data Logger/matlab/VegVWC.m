@@ -1,5 +1,5 @@
 function [ vwc ] = VegVWC( vin )
-%VEGVWC Converts vegetronix analog voltage output to vwc
+%VEGVWC Converts vegetronix analog voltage output to vwc percentage
 %   Detailed explanation goes here
     
     if (vin < 1.1)

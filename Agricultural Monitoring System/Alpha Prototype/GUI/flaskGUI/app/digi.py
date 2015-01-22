@@ -17,8 +17,8 @@ class Digi:
 		payload = {'description': description, 'id': stream_id, 'type': data_type}
 		return requests.post(self.baseURL + 'ws/v1/streams/inventory', auth=(self.user, self.pw), json=payload)
 
-	# def getStreamHistory(self, stream_id):
-	# 	return requests.get
+	def getStreamHistory(self, stream_id):
+		return requests.get(self.baseURL + '/ws/v1/streams/history/' + stream_id, auth=(self.user, self.pw))
 
 	def deleteStream(self, stream_id):
 		return requests.delete(self.baseURL + '/ws/v1/streams/inventory/' + stream_id, auth=(self.user, self.pw))	
