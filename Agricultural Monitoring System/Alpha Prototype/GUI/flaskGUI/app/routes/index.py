@@ -5,6 +5,7 @@ from firebase.firebase import FirebaseApplication, FirebaseAuthentication
 from app import app
 from app.digi import Digi
 from app.userConfig import config 
+from datetime import datetime
 
 myConfig = config()
 myDigi = Digi(myConfig.username, myConfig.password)
@@ -21,12 +22,20 @@ def root():
     						user={'name':'Chad'},
     						list=res["list"])
 
-@app.route('/jam')
-def jam():
-	node = request.args.get('node', 'no_node')
-	sensor = request.args.get('sensor', 'no_sensor')
-	name = request.args.get('name', 'no_name')
-	age = request.args.get('age', '0')
-	#res = firebase.get('/Chad', None)
-	res = firebase.post('/Chad/'+node+'/'+sensor, {"Sensor": sensor, "name": name})
-	return "post success: %s" % node
+@app.route('/update')
+def update():
+	
+	current_time = str(datetime.now().time())
+
+	data = {
+		"Temperature":  request.args.get('temp', 'no_temp'),
+		"VWC":          request.args.get('vwc', 'no_vwc'),
+		"Time":         current_time
+	}
+
+	loc = request.args.get('loc', 'no_location')
+	sensor = request.args.get('lev', 'no_sensor_depth')
+	url = '/Chad/%s/%s' % (loc, sensor) 
+
+	res = firebase.post(url, data)
+	return "post success: %s" % current_time
