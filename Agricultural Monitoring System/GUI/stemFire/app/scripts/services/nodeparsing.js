@@ -27,6 +27,23 @@ angular.module('stemFireApp')
 
       addRecord: function () {
 
+      },
+
+      findEntryByTime: function (arr, time) {
+        var entry = $.grep(arr, function(e) {
+          return e.timeStamp === time;
+        });
+
+        if (entry.length === 0) {
+          return null;
+        }
+        else if (entry.length === 1) {
+          return entry[0];
+        }
+        // else multiple items were found
+        else {
+          return entry;
+        }
       }
     };
   });

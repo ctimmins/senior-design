@@ -16,5 +16,6 @@ angular.module('stemFireApp', [
     'ngSanitize',
     'ngTouch',
     'firebase',
-    'firebase.utils'
+    'firebase.utils',
+    'd3'
   ]);
