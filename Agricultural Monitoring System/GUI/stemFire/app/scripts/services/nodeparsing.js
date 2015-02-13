@@ -12,12 +12,21 @@ angular.module('stemFireApp')
     // Service logic
     // ...
 
-    var meaningOfLife = 42;
-
     // Public API here
     return {
-      someMethod: function () {
-        return meaningOfLife;
+      removeRecord: function (arr, attr, value) {
+        var i = arr.length;
+        while (i--) {
+          if (arr[i] && arr[i].hasOwnProperty(attr) && (arguments.length > 2 && arr[i][attr] === value)) {
+            arr.splice(i,1);
+          }
+        }        
+        console.log('record removed');
+        return arr;
+      },
+
+      addRecord: function () {
+
       }
     };
   });
