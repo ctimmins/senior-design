@@ -18,12 +18,10 @@ angular.module('stemFireApp')
 
     nodeRef.orderByKey().on('child_added', function(snapshot) {
     	var obj = {};
-    	obj[snapshot.key()] = snapshot.exportVal(); 
+    	obj['time'] = snapshot.key();
+    	obj['data'] = snapshot.exportVal(); 
     	$scope.snapshot.push(obj);
-    	console.log(snapshot.key());
-    	snapshot.forEach(function(child) {
-    		console.log(child.key() + ': ' + JSON.stringify(child.exportVal()));
-    	});
+    	
 
     	console.log('');
     	console.log($scope.snapshot);
