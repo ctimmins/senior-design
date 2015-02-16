@@ -22,8 +22,8 @@ angular.module('stemFireApp')
     	var obj = {
     		timeStamp: snapshot.key(),
     		nodeData: snapshot.exportVal()
-    	}
-    	
+    	};
+
     	$scope.snapshot.push(obj);    	
     });
 
