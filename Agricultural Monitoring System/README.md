@@ -1,4 +1,4 @@
-#Agricultural Monitoring System
+#System for Temperature and Evapotranspiration Monitoring (STEM)
 
 ###GOAL
 To quantify the microclimates within an agricultural setting. With a network of sensors, various data points from different locations can be collected and then analyzed. This system should be user friendly and provide information about the water content and temperature of grape leaves from the IR sensor and soil moisture and soil temperature from the soil sensors. The data will be stored and accessible from a web application.
