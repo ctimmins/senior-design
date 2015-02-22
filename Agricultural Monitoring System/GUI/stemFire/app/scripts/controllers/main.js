@@ -88,6 +88,10 @@ angular.module('stemFireApp')
       day: {
         type: 'datetime',
         name: 'Date'
+      },
+      income: {
+        type: 'numeric',
+        name: 'income'
       }
     };
 
@@ -95,7 +99,7 @@ angular.module('stemFireApp')
       rows: [
         {
           key: 'income',
-          type: 'bar'
+          type: 'bar',
         }, 
         {
           key: 'sales'
@@ -114,7 +118,8 @@ angular.module('stemFireApp')
         displayFormat: '%Y-%m-%d'
       },
 
-      type: 'spline'
+      type: 'spline',
+
     };
  
     
