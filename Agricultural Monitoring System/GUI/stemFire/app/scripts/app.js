@@ -17,5 +17,5 @@ angular.module('stemFireApp', [
     'ngTouch',
     'firebase',
     'firebase.utils',
-    'd3'
+    'angularChart'
   ]);

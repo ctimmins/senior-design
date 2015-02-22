@@ -6,7 +6,7 @@
  * @description
  * # simpleLineChart
  */
- angular.module('stemFireApp')
+ angular.module('stemFireApp', ['d3'])
    .directive('simpleLineChart', ['d3Service', function(d3Service) {
      return {
        restrict: 'EA',
