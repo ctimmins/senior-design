@@ -36,7 +36,7 @@ angular.module('stemFireApp')
     $scope.dataset = [
       {
         'day': '2013-01-08T00:00:00',
-        'sales': 300,
+        'vwc': 300,
         'income': 200,
         'customers': 30,
         'units': 130,
@@ -44,7 +44,7 @@ angular.module('stemFireApp')
       },
       {
         'day': '2013-01-03T00:00:00',
-        'sales': 200,
+        'vwc': 200,
         'income': 130,
         'customers': 20,
         'units': 120,
@@ -52,7 +52,7 @@ angular.module('stemFireApp')
       },
       {
         'day': '2013-01-04T00:00:00',
-        'sales': 160,
+        'vwc': 160,
         'income': 90,
         'customers': 50,
         'units': 150,
@@ -60,7 +60,7 @@ angular.module('stemFireApp')
       },
       {
         'day': '2013-01-05T00:00:00',
-        'sales': 400,
+        'vwc': 400,
         'income': 240,
         'customers': 40,
         'units': 140,
@@ -68,7 +68,7 @@ angular.module('stemFireApp')
       },
       {
         'day': '2013-01-06T00:00:00',
-        'sales': 250,
+        'vwc': 250,
         'income': 130,
         'customers': 60,
         'units': 160,
@@ -76,7 +76,7 @@ angular.module('stemFireApp')
       },
       {
         'day': '2013-01-07T00:00:00',
-        'sales': 250,
+        'vwc': 250,
         'income': 220,
         'customers': 50,
         'units': 150,
@@ -102,7 +102,7 @@ angular.module('stemFireApp')
           type: 'bar',
         }, 
         {
-          key: 'sales'
+          key: 'vwc'
         },
         {
           key: 'units'
@@ -118,7 +118,7 @@ angular.module('stemFireApp')
         displayFormat: '%Y-%m-%d'
       },
 
-      type: 'spline',
+      type: 'area-spline',
 
     };
  
