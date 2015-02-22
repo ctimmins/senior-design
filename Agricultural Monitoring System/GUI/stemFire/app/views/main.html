@@ -1,6 +1,20 @@
 <div class="jumbotron">
+  <p>
+    <h3>Volumetric Water Content</h3>
+    <select id="chart_type" ng-model="chartType" ng-change="updateChartType(chartType)">
+      <option value="line">line</option>
+      <option value="spline">spline</option>
+      <option value="area">area</option>
+      <option value="area-spline">area-spline</option>
+      <option value="scatter">scatter</option>
+      <option value="bar">bar</option>
+      <option value="donut">donut</option>
+      <option value="step">step</option>
+      <option value="area-step">area-step</option>
+    </select>
+  </p>
   <p class="lead">
-    <angularchart dataset="dataset" schema="schema" options="options"></angularchart>
+    <angularchart dataset="vwc" schema="schema" options="options"></angularchart>
   </p>
   <p>
     <a class="btn btn-lg btn-success" ng-href="#/">Splendid!<span class="glyphicon glyphicon-ok"></span></a>
