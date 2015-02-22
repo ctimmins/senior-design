@@ -30,7 +30,7 @@ angular.module('stemFireApp')
       },
 
       findEntryByTime: function (arr, time) {
-        var entry = $.grep(arr, function(e) {
+        var entry = window.$.grep(arr, function(e) {
           return e.timeStamp === time;
         });
 
