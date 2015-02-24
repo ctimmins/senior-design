@@ -10,11 +10,12 @@ void blinkLED(int count, int interval, int delay) {
     }
     CyDelay(delay);
 }
-
+// LCD utility functions
 void initLCD() {
     LCD_Start();
     LCD_ClearDisplay();
-    LCD_PrintString("status: ");
+    LCD_Position(0,0);
+    LCD_PrintString("Rx: ");
     LCD_Position(1,0);
     LCD_PrintString("Count: ");
     LCD_Position(1,7);
@@ -42,6 +43,12 @@ void printWakeCount(uint16 count) {
     LCD_PrintNumber(count);
 }
 
+void printXbeeRx(char ch) {
+    LCD_Position(0,4);
+    LCD_PrintInt8(ch);
+}
+
+//Sleep utility functions
 void sleepPsoc() {
     //Prepare clock tree configuration
     CyPmSaveClocks();
@@ -52,10 +59,14 @@ void sleepPsoc() {
 
 void onWakeup() {
     //CyPmRestoreClocks();
-    LCD_Position(0,0);
-    LCD_PrintString("Im awake!");
-    CyDelay(1000);
-    LCD_Position(0,0);
-    LCD_PrintString("         ");
+    //UART_Xbee_PutChar('c');
+    UART_Xbee_PutString("V,0,1.1234,c");
+    CyDelay(200);
+    UART_Xbee_PutString("V,1,2.5678,c");
+    CyDelay(200);
+}
+
+void initAllComponents() {
+        
 }
     

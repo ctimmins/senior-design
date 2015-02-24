@@ -19,5 +19,11 @@
     
     void onWakeup();
     
+    //XBee and UART
+    void printXbeeRx(char ch);
+    
+    //Hardware Components
+    void initAllComponents();
+    
 #endif
     

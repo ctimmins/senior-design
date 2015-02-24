@@ -5,25 +5,31 @@ uint16 wake_count;
 CY_ISR(wakeISR) {
     //get state of Sleep Timer's status register and clear interrupt flag
     int status = SleepTimer_GetStatus();
-    //blinkLED(3,100,0);
+ 
     ++wake_count;
-    if (wake_count % 4 == 0) {
-        //Wake device up
-        //onWakeup();
-        
-        
-    }
-    else {
-        //Device needs to go back to sleep
-        //sleepPsoc();
-    }
     
 }
 
-/*
-    Assigns correct vector address to isr component
-*/
+CY_ISR(XbeeRx) {
+    //Clear XBee interrupt flag
+    UART_Xbee_ReadRxStatus();
+    //CommandReceived = XBee_UART_GetByte();
+}
+
+void initAllISR() {
+    //wakeup ISR
+    initWakeISR();
+    //XBee Receive ISR
+    initXbeeRxISR();
+}
+    
+
 void initWakeISR(void) {
     isr_wakeup_Start();
     isr_wakeup_SetVector(wakeISR);
+}
+
+void initXbeeRxISR() {
+    isr_xbee_rx_Start();
+    isr_xbee_rx_SetVector(XbeeRx);
 }

@@ -11,10 +11,12 @@
     
     //FUNCTION PROTOTYPES
     CY_ISR_PROTO(wakeISR);
-    
+    CY_ISR_PROTO(XbeeRx);
     
     //UTILITY FUNCTIONS
-    void initWakeISR(void);
+    void initAllISR();
+    void initWakeISR();
+    void initXbeeRxISR();
     
     
     
