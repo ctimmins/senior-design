@@ -6,10 +6,10 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <link rel="stylesheet" href="bower_components/angular-chart/angular-chart.css" />
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/c3/c3.css" />
-    <link rel="stylesheet" href="bower_components/angular-chart/angular-chart.css" />
     <link rel="stylesheet" href="bower_components/angular-circular-navigation/angular-circular-navigation.css" />
 
     <!-- endbower -->
@@ -27,9 +27,9 @@
     <div class="container">
       <div class="header">
         <ul class="nav nav-pills pull-right">
-          <li class="active"><a ng-href="#">Home</a></li>
+          <li><a ng-href="#">Soil</a></li>
           <!-- //angularfire -->
-          <li><a ng-href="#/chat">chat</a></li>
+          <li><a ng-href="#/leaves">Leaves</a></li>
           </ul>
         <h3 class="text-muted">stemFire</h3>
       </div>
@@ -38,7 +38,7 @@
       <div ng-view=""></div>
 
       <div class="footer">
-        <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team, and from Firebase</p>
+        <p><span class="glyphicon glyphicon-heart"></span> from the STEM team at UC Davis</p>
       </div>
     </div>
 
@@ -101,8 +101,7 @@
         <script src="scripts/filters/reverse.js"></script>
         <script src="scripts/routes.js"></script>
         <script src="scripts/services/nodeparsing.js"></script>
-        <!-- <script src="scripts/services/d3service.js"></script>
-        <script src="scripts/directives/simplelinechart.js"></script> -->
+        <script src="scripts/controllers/leaves.js"></script>
         <!-- endbuild -->
 </body>
 </html>

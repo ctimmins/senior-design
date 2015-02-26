@@ -8,7 +8,7 @@
  * Controller of the stemFireApp
  */
 angular.module('stemFireApp')
-  .controller('MainCtrl', function ($scope, fbutil, nodeParsing) {
+  .controller('MainCtrl', ['$scope', 'fbutil', 'nodeParsing', function ($scope, fbutil, nodeParsing) {
 
     $scope.nodeData = fbutil.syncArray('1/soil sensors', {limitToLast: 10});
     
@@ -99,4 +99,4 @@ angular.module('stemFireApp')
       });
     };
     
-  });
+  }]);

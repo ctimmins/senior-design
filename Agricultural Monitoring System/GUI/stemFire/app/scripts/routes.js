@@ -23,5 +23,10 @@ angular.module('stemFireApp')
         controller: 'ChatCtrl'
       })
 
+      .when('/leaves', {
+        templateUrl: 'views/leaves.html',
+        contoller: 'LeavesCtrl'
+      })
+
       .otherwise({redirectTo: '/'});
   }]);
