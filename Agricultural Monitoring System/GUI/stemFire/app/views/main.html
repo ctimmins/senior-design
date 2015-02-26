@@ -1,7 +1,7 @@
 <div class="jumbotron">
   <p>
     <h3>Volumetric Water Content</h3>
-    <select id="chart_type" ng-model="chartType" ng-change="updateChartType(chartType)">
+    <select id="ChartType" ng-model="ChartType" ng-change="updateChartType(ChartType)">
       <option value="line">line</option>
       <option value="spline">spline</option>
       <option value="area">area</option>
@@ -14,7 +14,30 @@
     </select>
   </p>
   <p class="lead">
-    <angularchart dataset="vwc" schema="schema" options="options"></angularchart>
+    <angularchart dataset="vwc" schema="vwc_schema" options="vwc_options"></angularchart>
+  </p>
+  <p>
+    <a class="btn btn-lg btn-success" ng-href="#/">Splendid!<span class="glyphicon glyphicon-ok"></span></a>
+  </p>
+</div>
+
+<div class="jumbotron">
+  <p>
+    <h3>Soil Temperature</h3>
+    <select id="tChartType" ng-model="tChartType" ng-change="updateVChartType(tChartType)">
+      <option value="line">line</option>
+      <option value="spline">spline</option>
+      <option value="area">area</option>
+      <option value="area-spline">area-spline</option>
+      <option value="scatter">scatter</option>
+      <option value="bar">bar</option>
+      <option value="donut">donut</option>
+      <option value="step">step</option>
+      <option value="area-step">area-step</option>
+    </select>
+  </p>
+  <p class="lead">
+    <angularchart dataset="temperature" schema="vwc_schema" options="vwc_options"></angularchart>
   </p>
   <p>
     <a class="btn btn-lg btn-success" ng-href="#/">Splendid!<span class="glyphicon glyphicon-ok"></span></a>
