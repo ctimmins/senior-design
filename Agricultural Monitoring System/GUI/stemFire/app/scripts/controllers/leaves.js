@@ -8,6 +8,6 @@
  * Controller of the stemFireApp
  */
 angular.module('stemFireApp')
-  .controller('LeavesCtrl', function ($scope) {
+  .controller('LeavesCtrl',['$scope', function ($scope) {
 
-  });
+  }]);
