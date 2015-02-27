@@ -10,38 +10,33 @@
 angular.module('stemFireApp')
   .controller('MainCtrl', ['$scope', 'fbutil', 'nodeParsing', function ($scope, fbutil, nodeParsing) {
 
-    $scope.nodeData = fbutil.syncArray('1/soil sensors', {limitToLast: 10});
+    $scope.nodeData = fbutil.syncArray('1/soil sensors', {limitToLast: 100});
     
-    //$scope.snapshot = [];
+    $scope.snapshot = [];
     $scope.vwc = [];
     $scope.temperature = [];
-
-    //window.snapTest = $scope.snapshot;
 
     var nodeRef = $scope.nodeData.$inst().$ref();
 
     nodeRef.orderByKey().on('child_added', function (snapshot) {
-    	// var obj = {
-    	// 	timeStamp: snapshot.key(),
-    	// 	nodeData: snapshot.exportVal()
-    	// };
+    	var obj = {
+    		timeStamp: snapshot.key(),
+    		nodeData: snapshot.exportVal()
+    	};
       
-      var timeStamp = snapshot.key();
-      var snapshotData = snapshot.exportVal();
-
       // build data for vwc graph
       var v_obj = {};
-      v_obj['timeStamp'] = timeStamp;
-      for (var key in snapshotData) {
-        v_obj[key] = parseFloat(snapshotData[key]['vwc']);
+      v_obj['timeStamp'] = obj.timeStamp;
+      for (var key in obj.nodeData) {
+        v_obj[key] = parseFloat(obj.nodeData[key]['vwc']);
       }
       $scope.vwc.push(v_obj);
 
       //build data for temp graph
       var t_obj = {};
-      t_obj['timeStamp'] = timeStamp;
-    	for (var key in snapshotData) {
-        t_obj[key] = parseFloat(snapshotData[key]['temp']);
+      t_obj['timeStamp'] = obj.timeStamp;
+    	for (var key in obj.nodeData) {
+        t_obj[key] = parseFloat(obj.nodeData[key]['temp']);
       }
       $scope.temperature.push(t_obj);
 
