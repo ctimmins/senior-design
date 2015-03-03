@@ -10,15 +10,15 @@
 angular.module('stemFireApp')
   .controller('MainCtrl', ['$scope', 'fbutil', 'nodeParsing', function ($scope, fbutil, nodeParsing) {
 
-    $scope.nodeData = fbutil.syncArray('1/soil sensors', {limitToLast: 100});
+    $scope.soilSensors = fbutil.syncArray('1/soil sensors', {limitToLast: 100});
     
     $scope.snapshot = [];
     $scope.vwc = [];
     $scope.temperature = [];
 
-    var nodeRef = $scope.nodeData.$inst().$ref();
+    var soilRef = $scope.soilSensors.$inst().$ref();
 
-    nodeRef.orderByKey().on('child_added', function (snapshot) {
+    soilRef.orderByKey().on('child_added', function (snapshot) {
     	var obj = {
     		timeStamp: snapshot.key(),
     		nodeData: snapshot.exportVal()
@@ -43,15 +43,17 @@ angular.module('stemFireApp')
       $scope.snapshot.push(obj);    	
     });
     
-    nodeRef.on('child_removed', function (snapshot) {
-    	console.log('removing record');
-    	nodeParsing.removeRecord($scope.snapshot, 'timeStamp', snapshot.key());
-    });
+    // soilRef.on('child_removed', function (snapshot) {
+    // 	console.log('removing record');
+    // 	nodeParsing.removeRecord($scope.snapshot, 'timeStamp', snapshot.key());
+    // });
 
+    window.snapshot = $scope.snapshot;
+    window.vwc = $scope.vwc;
 
     // Angular Chart
 
-    $scope.ChartType = 'bar';
+    $scope.ChartType = 'area-spline';
 
     $scope.vwc_schema = {
       timeStamp: {
@@ -65,7 +67,8 @@ angular.module('stemFireApp')
       rows: [
         {
           key: '0',
-          axis: 'y'
+          axis: 'y',
+          type: 'area-spline'
         }
       ],
 
@@ -83,8 +86,6 @@ angular.module('stemFireApp')
         label: 'Volumetric Water Content (%)'
       },
 
-      type: $scope.ChartType,
-
     };
 
     function onChartClick() {
@@ -95,6 +96,7 @@ angular.module('stemFireApp')
       $scope.vwc_options.rows.forEach(function(row) {
         row.type = sel;
       });
+      console.log($scope.ChartType);
     };
     
   }]);
