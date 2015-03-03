@@ -3,7 +3,7 @@
     
     #include <stddef.h>
     #include <project.h>
-    char calculateCheckSum(char *res);
+    char calculateCheckSum(char *res, int len);
     
 #endif
     

@@ -135,7 +135,7 @@ void XBeeTxPTAT(){
             sprintf(PTATData, "%X", readPTAT());
             Xbee_UART_PutString(PTATData);
             Xbee_UART_PutChar(',');
-            Xbee_UART_PutChar(calculateCheckSum(PTATData));
+            Xbee_UART_PutChar(calculateCheckSum(PTATData, strlen(PTATData)));
             CyDelay(200);
             //Xbee_UART_ClearTxBuffer();   
 }
@@ -146,7 +146,7 @@ void XBeeTxCompensation(){
             sprintf(CompData, "%X", readCompensation());
             Xbee_UART_PutString(CompData);
             Xbee_UART_PutChar(',');
-            Xbee_UART_PutChar(calculateCheckSum(CompData));
+            Xbee_UART_PutChar(calculateCheckSum(CompData, strlen(CompData)));
             
 
             CyDelay(200);
@@ -184,7 +184,7 @@ void XBeeTxPixelSlope(){
 
             }
             Xbee_UART_PutChar(',');
-            Xbee_UART_PutChar(calculateCheckSum(outData));
+            Xbee_UART_PutChar(calculateCheckSum(outData, strlen(outData)));
             CyDelay(200);
             //Xbee_UART_ClearTxBuffer();
     
@@ -232,14 +232,14 @@ void XBeeTxFrame(){
             Xbee_UART_PutString("IL,");
             Xbee_UART_PutArray(IRLowPointer, 64);
             Xbee_UART_PutChar(',');
-            Xbee_UART_PutChar(calculateCheckSum((char *)IRLowPointer));
+            Xbee_UART_PutChar(calculateCheckSum((char *)IRLowPointer, 64));
             CyDelay(200);
             
             //send last 64 bytes of IR data
             Xbee_UART_PutString("IH,");
             Xbee_UART_PutArray(IRHighPointer, 64);
             Xbee_UART_PutChar(',');
-            Xbee_UART_PutChar(calculateCheckSum((char *)IRHighPointer));
+            Xbee_UART_PutChar(calculateCheckSum((char *)IRHighPointer, 64));
              CyDelay(200);
 }
 

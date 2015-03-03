@@ -10,8 +10,8 @@
  * ========================================
 */
 #include <project.h>
-#include <MLX.h>
 #include <stdio.h>
+#include "MLX.h"
 #include "utils.h"
 
 //State Definitions.
@@ -124,8 +124,8 @@ int main()
                 Xbee_UART_PutString(temp_out);
             }       //end for
             
-            //Transmit Checksum
-             Xbee_UART_PutChar(calculateCheckSum(toCksm));
+            //Transmit Checksum for Vegetronix
+             Xbee_UART_PutChar(calculateCheckSum(toCksm, strlen(toCksm)));
             
             //END TX VEG----------------------------------------
             
