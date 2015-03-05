@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include "MLX.h"
 #include "utils.h"
+#include "stem_isr.h"
 
 //State Definitions.
 #define WAKE 0            
@@ -23,8 +24,11 @@
 //number of levels (depths)
 #define NUM_LEVELS 1
 
+//Time asleep ~= 4 seconds
+uint8 wakeCycles = 8;
+
 //Vegetronix Definitions
-uint8 state = WAKE;
+uint8 state;
 double voltage[NUM_LEVELS];
 uint16 value;
 char Veg_out[16];
@@ -34,6 +38,9 @@ double temperature[NUM_LEVELS];
 char temp_out[6];
 int main()
 {
+    //Enable custom ISR's
+    initAllISR();
+    
     //Enable Globals
     CyGlobalIntEnable;    
     
@@ -43,14 +50,18 @@ int main()
     Xbee_UART_Start();
     I2C_1_Start();   
     CyDelay(250);
-
-
     
     //read EEPROM, config, and oscillator trimming value
     readEEPROM();
     writeOscTrimValue();
     writeConfigValue();
-
+    
+    //Initialize PSOC state
+    state = WAKE;
+    
+    //Start Sleep Timer 
+    SleepTimer_Start();
+    
     
     for(;;)
     {
@@ -134,9 +145,18 @@ int main()
         } // end TXDATA
         
         else if (state == SLEEPMODE){
-            CyDelay(5000);
-            //Change State
-            state = WAKE;
+            //put her to sleep
+            //CyDelay(2000);
+            if (wake_count % wakeCycles == 0) {
+                //Change State
+                state = WAKE;
+                continue;
+            }
+            else {
+                sleepPsoc();   
+            }
+            
+            
         } // END SLEEPM0DE
         
         else{ // Error in state machine, to be filled out. Likely a reset will occur here. 
