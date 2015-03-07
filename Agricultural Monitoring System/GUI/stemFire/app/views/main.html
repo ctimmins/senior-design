@@ -1,62 +1,38 @@
-<div class="jumbotron">
-  <p>
-    <h3>Volumetric Water Content</h3>
-    <select id="ChartType" ng-model="ChartType" ng-change="updateChartType(ChartType)">
-      <option value="line">line</option>
-      <option value="spline">spline</option>
-      <option value="area">area</option>
-      <option value="area-spline">area-spline</option>
-      <option value="scatter">scatter</option>
-      <option value="bar">bar</option>
-      <option value="donut">donut</option>
-      <option value="step">step</option>
-      <option value="area-step">area-step</option>
-    </select>
-    <select id="nodeSelect" ng-model="selectedNode" ng-change="nodeSelectChange(selectedNode)">
-      <option ng-repeat="(key,val) in nodes" value="{{key}}">{{val}}</option>
-    </select>
-  </p>
-  <p class="lead">
+<div class="row marketing">
+  <select id="ChartType" ng-model="ChartType" ng-change="updateChartType(ChartType)">
+    <option value="line">line</option>
+    <option value="spline">spline</option>
+    <option value="area">area</option>
+    <option value="area-spline">area-spline</option>
+    <option value="scatter">scatter</option>
+    <option value="bar">bar</option>
+    <option value="donut">donut</option>
+    <option value="step">step</option>
+    <option value="area-step">area-step</option>
+  </select>
+  <select id="nodeSelect" ng-model="selectedNode" ng-change="nodeSelectChange(selectedNode)">
+    <option ng-repeat="(key,val) in nodes" value="{{key}}">{{val}}</option>
+  </select>
+</div>
+
+<div class="row">
+
+  <div class="col-sm-12 col-md-6">
+    <h3 class="graphTitle marketing">Volumetric Water Content</h3>
     <angularchart dataset="thisVwc" schema="vwc_schema" options="vwc_options"></angularchart>
-  </p>
-  <p>
-    <a class="btn btn-lg btn-success" ng-href="#/">Splendid!<span class="glyphicon glyphicon-ok"></span></a>
-  </p>
+  </div>
+
+  <div class="col-sm-12 col-md-6">
+    <h3 class="marketing graphTitle">Soil Temperature</h3>
+    <!-- <angularchart dataset="thisTemp" schema="vwc_schema" options="vwc_options"></angularchart> -->
+  </div>
 </div>
 
-<div class="jumbotron">
-  <p>
-    <h3>Soil Temperature</h3>
-    <select id="tChartType" ng-model="tChartType" ng-change="updateVChartType(tChartType)">
-      <option value="line">line</option>
-      <option value="spline">spline</option>
-      <option value="area">area</option>
-      <option value="area-spline">area-spline</option>
-      <option value="scatter">scatter</option>
-      <option value="bar">bar</option>
-      <option value="donut">donut</option>
-      <option value="step">step</option>
-      <option value="area-step">area-step</option>
-    </select>
-  </p>
-  <p class="lead">
-    <angularchart dataset="thisTemp" schema="vwc_schema" options="vwc_options"></angularchart>
-  </p>
-  <p>
-    <a class="btn btn-lg btn-success" ng-href="#/">Splendid!<span class="glyphicon glyphicon-ok"></span></a>
-  </p>
+<div class="row marketing fieldTitle">
+
+  <div class="col-lg-6 col-md-6 col-lg-offset-3 col-md-offset-3">
+    <h3>Sensor Status</h3>
+  </div>
+
 </div>
 
-
-
-<!-- <div class="row marketing">
-  <h2>{{snapshot}}</h2>
-  <div ng-repeat="s in snapshot | reverse">
-    <h2>{{s.timeStamp}}</h2>
-    <div ng-repeat="(lev, sdata) in s.nodeData">
-      <h4>{{lev}}</h4>
-      <p ng-repeat="(key, val) in sdata">{{key}}: {{val}}</p>
-    </div>
-  </div>  
-</div>
- -->

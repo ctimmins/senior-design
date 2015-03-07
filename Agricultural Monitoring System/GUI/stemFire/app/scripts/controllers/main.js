@@ -18,7 +18,7 @@ angular.module('stemFireApp')
     // Synchronized arrays 
     var soilSensors = $firebaseArray(s_ref);
     soilSensors.$watch(function(e) {
-      console.log('which_node: '+e.key);
+      //console.log('which_node: '+e.key);
     })
     var IRSensors = $firebaseArray(ir_ref);
     var sensorInfo = $firebaseArray(info_ref);
@@ -37,7 +37,7 @@ angular.module('stemFireApp')
     
     info_ref.orderByKey().on('child_added', function(node) {
       $scope.nodes[node.key()] = node.child('Name').val();
-      console.log('node: '+node.key());
+      //console.log('node: '+node.key());
 
       $scope.vwc[node.key()] = [];
       $scope.temperature[node.key()] = [];
@@ -62,10 +62,10 @@ angular.module('stemFireApp')
           $scope.thisVwc = $scope.vwc[node.key()];
           $scope.thisTemp = $scope.temperature[node.key()];
         }
-        console.log(timeStamp);
+        //console.log(timeStamp);
       });
 
-      console.log('-------------------------');
+      //console.log('-------------------------');
 
     });
 
@@ -73,7 +73,7 @@ angular.module('stemFireApp')
       $scope.selectedNode = nodeID;
       $scope.thisVwc = $scope.vwc[$scope.selectedNode];
       $scope.thisTemp = $scope.temperature[$scope.selectedNode];
-      console.log($scope.thisVwc);
+      //console.log($scope.thisVwc);
     };
     
     
@@ -88,7 +88,7 @@ angular.module('stemFireApp')
     //   soilData[snapshot.key()] = snapshot.val();
     //   // if (snapshot.key() == $scope.selectedNode) {
     //   //   $scope.nodeData = soilData[snapshot.key()]
-    //   //   console.log()
+    //   //   //console.log()
     //   // }
     // });
     
@@ -133,11 +133,13 @@ angular.module('stemFireApp')
       },
 
       yAxis: {
-        label: 'Volumetric Water Content (%)'
+        label: 'Volumetric Water Content (%)',
+        displayFormat: window.d3.format("0.2%")
       },
 
     };
-
+    var fmat = window.d3.format("0.2%");
+    console.log(fmat("1.1456"))
     $scope.temp_options = {
       rows: [
         {
@@ -171,7 +173,7 @@ angular.module('stemFireApp')
       $scope.vwc_options.rows.forEach(function(row) {
         row.type = sel;
       });
-      console.log($scope.ChartType);
+      //console.log($scope.ChartType);
     };
     
   }]);
