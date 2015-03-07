@@ -8,49 +8,111 @@
  * Controller of the stemFireApp
  */
 angular.module('stemFireApp')
-  .controller('MainCtrl', ['$scope', 'fbutil', 'nodeParsing', function ($scope, fbutil, nodeParsing) {
+  .controller('MainCtrl', ['$scope', '$firebaseArray', 'nodeParsing', function ($scope, $firebaseArray, nodeParsing) {
 
-    $scope.soilSensors = fbutil.syncArray('1/soil sensors', {limitToLast: 100});
+    //$scope.soilSensors = fbutil.syncArray('1/soil sensors', {limitToLast: 100});
+    var s_ref = new Firebase("https://agmon.firebaseio.com/soil sensors")
+    var ir_ref = new Firebase("https://agmon.firebaseio.com/IR data");
+    var info_ref = new Firebase("https://agmon.firebaseio.com/node info");
+
+    // Synchronized arrays 
+    var soilSensors = $firebaseArray(s_ref);
+    soilSensors.$watch(function(e) {
+      console.log('key: '+e.key);
+    })
+    var IRSensors = $firebaseArray(ir_ref);
+    var sensorInfo = $firebaseArray(info_ref);
     
-    $scope.snapshot = [];
+    
+    // NODE SELECTION AND DATA
+    $scope.nodes = {}
+    $scope.selectedNode = 1;
+    var syncSoilNodes = {}
+    // var nodeRef = s_ref.child($scope.selectedNode)
+    // var nodeArray = $firebaseArray(nodeRef);
+    // nodeArray.$watch(function(e) {
+    //   console.log('key: '+e.key);
+    // });
+    info_ref.orderByKey().on('child_added', function(snapshot) {
+      $scope.nodes[snapshot.key()] = snapshot.child('Name').val();
+      syncSoilNodes[snapshot.key()] = $firebaseArray(s_ref.child(snapshot.key()));
+      syncSoilNodes[snapshot.key()].$watch(function(e) {
+        console.log('prev: ' + e.prevChild);
+        console.log('child: ' + e.key);
+      })
+    });
+
+    window.syncSoil = syncSoilNodes;
+
+    $scope.nodeSelectChange = function(nodeID) {
+      $scope.selectedNode = nodeID;
+      nodeRef = s_ref.child($scope.selectedNode)
+      $scope.nodeData = soilSensors.$getRecord($scope.selectedNode)
+    };
+    
+    //Build data for graphs
+
+
+
+    window.sdata = $scope.nodeData;
     $scope.vwc = [];
     $scope.temperature = [];
 
-    var soilRef = $scope.soilSensors.$inst().$ref();
+    // build data for selected node
+    // var soilData = {}
+    // s_ref.orderByKey().on('child_added', function(snapshot) {
+    //   soilData[snapshot.key()] = snapshot.val();
+    //   // if (snapshot.key() == $scope.selectedNode) {
+    //   //   $scope.nodeData = soilData[snapshot.key()]
+    //   //   console.log()
+    //   // }
+    // });
+    
+    // build data for vwc and soil temperature graph
+    var v_obj = {};
+    var t_obj = {};
+    
+    
 
-    soilRef.orderByKey().on('child_added', function (snapshot) {
-    	var obj = {
-    		timeStamp: snapshot.key(),
-    		nodeData: snapshot.exportVal()
-    	};
+
+    
+
+    // $scope.soilSensors.$watch(function(obj) {
+    //   console.log('event: ' + obj.event);
+    //   console.log('key: ' + obj.key);
+    // });
+/*
+    s_ref.orderByKey().on('child_added', function (snapshot) {
+
+      var timeStamp = snapshot.key()
+      var nodeData = snapshot.exportVal()
       
-      // build data for vwc graph
+      // build data for vwc and soil temperature graph
       var v_obj = {};
-      v_obj['timeStamp'] = obj.timeStamp;
-      for (var key in obj.nodeData) {
-        v_obj[key] = parseFloat(obj.nodeData[key]['vwc']);
-      }
-      $scope.vwc.push(v_obj);
-
-      //build data for temp graph
       var t_obj = {};
-      t_obj['timeStamp'] = obj.timeStamp;
-    	for (var key in obj.nodeData) {
-        t_obj[key] = parseFloat(obj.nodeData[key]['temp']);
-      }
-      $scope.temperature.push(t_obj);
 
-      $scope.snapshot.push(obj);    	
+      v_obj['timeStamp'] = timeStamp;
+      t_obj['timeStamp'] = timeStamp;
+
+      for (var key in nodeData) {
+        v_obj[key] = parseFloat(nodeData[key]['vwc']);
+        t_obj[key] = parseFloat(nodeData[key]['temp']);
+      }
+
+      $scope.vwc.push(v_obj);
+      $scope.temperature.push(t_obj);
+   	
     });
     
+    window.vwc = $scope.vwc;
+    window.temperature = $scope.temperature;
+
     // soilRef.on('child_removed', function (snapshot) {
     // 	console.log('removing record');
     // 	nodeParsing.removeRecord($scope.snapshot, 'timeStamp', snapshot.key());
     // });
 
-    window.snapshot = $scope.snapshot;
-    window.vwc = $scope.vwc;
-
+*/
     // Angular Chart
 
     $scope.ChartType = 'area-spline';
@@ -84,6 +146,31 @@ angular.module('stemFireApp')
 
       yAxis: {
         label: 'Volumetric Water Content (%)'
+      },
+
+    };
+
+    $scope.temp_options = {
+      rows: [
+        {
+          key: '0',
+          axis: 'y',
+          type: 'area-spline'
+        }
+      ],
+
+      legend: {
+        'selector': false
+      },
+
+      xAxis: {
+        key: 'timeStamp',
+        selector: false,
+        displayFormat: '%H:%M:%S'
+      },
+
+      yAxis: {
+        label: 'Temperature (C)'
       },
 
     };

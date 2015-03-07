@@ -12,6 +12,9 @@
       <option value="step">step</option>
       <option value="area-step">area-step</option>
     </select>
+    <select id="nodeSelect" ng-model="selectedNode" ng-change="nodeSelectChange(selectedNode)">
+      <option ng-repeat="(key,val) in nodes" value="{{key}}">{{val}}</option>
+    </select>
   </p>
   <p class="lead">
     <angularchart dataset="vwc" schema="vwc_schema" options="vwc_options"></angularchart>
