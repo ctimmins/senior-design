@@ -16,5 +16,6 @@ angular.module('stemFireApp', [
     'ngSanitize',
     'ngTouch',
     'firebase',
-    'angularChart'
+    'angularChart',
+    'leaflet-directive'
   ]);

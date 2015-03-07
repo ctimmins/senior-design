@@ -10,6 +10,11 @@
 angular.module('stemFireApp')
   .controller('MainCtrl', ['$scope', '$firebaseArray', 'nodeParsing', function ($scope, $firebaseArray, nodeParsing) {
 
+    //initial latitude and longitude coordinates
+    var Latitude = 38.531869;
+    var Longitude = -121.751864;
+    $scope.markers = new Array();
+
     //$scope.soilSensors = fbutil.syncArray('1/soil sensors', {limitToLast: 100});
     var s_ref = new Firebase("https://agmon.firebaseio.com/soil sensors")
     var ir_ref = new Firebase("https://agmon.firebaseio.com/IR data");
@@ -22,7 +27,22 @@ angular.module('stemFireApp')
     })
     var IRSensors = $firebaseArray(ir_ref);
     var sensorInfo = $firebaseArray(info_ref);
-    
+    sensorInfo.$loaded()
+      .then(function(info) {
+        Latitude = info.$getRecord($scope.selectedNode)["Latitude"] | Latitude;
+        Longitude = info.$getRecord($scope.selectedNode)["Longitude"] | Longitude;
+        sensorInfo.forEach(function(obj) {
+          console.log(obj["Latitude"])
+          console.log(obj["Longitude"])
+          $scope.markers.push({
+            lat: obj["Latitude"],
+            lng: obj["Longitude"],
+            message: obj["Name"]
+          });
+        });
+        
+      });
+    window.sensorInfo = sensorInfo;
     
     // NODE SELECTION AND DATA
     $scope.nodes = {}
@@ -73,6 +93,8 @@ angular.module('stemFireApp')
       $scope.selectedNode = nodeID;
       $scope.thisVwc = $scope.vwc[$scope.selectedNode];
       $scope.thisTemp = $scope.temperature[$scope.selectedNode];
+      Latitude = sensorInfo.$getRecord($scope.selectedNode)["Latitude"] | Latitude;
+      Longitude = sensorInfo.$getRecord($scope.selectedNode)["Longitude"] | Longitude;
       //console.log($scope.thisVwc);
     };
     
@@ -97,7 +119,21 @@ angular.module('stemFireApp')
     var t_obj = {};
     
     
+    //Leaflet
+    
+    angular.extend($scope, {
+      center: {
+        lat: Latitude,
+        lng: Longitude,
+        zoom: 17,
+      },
+      defaults: {
+        maxZoom: 19,
+        minZoom: 15,
+        dragging: false
+      } 
 
+    });
 
     
 
@@ -138,8 +174,6 @@ angular.module('stemFireApp')
       },
 
     };
-    var fmat = window.d3.format("0.2%");
-    console.log(fmat("1.1456"))
     $scope.temp_options = {
       rows: [
         {
