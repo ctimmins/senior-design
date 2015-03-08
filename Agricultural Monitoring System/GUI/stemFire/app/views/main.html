@@ -1,28 +1,47 @@
-<div class="row marketing">
+<div class="row marketing" style="margin-top: 10px">
   <h1>Dashboard</h1>
-  <leaflet center="center" markers="markers" width="90%" height="400"></leaflet>
-  <select id="ChartType" ng-model="ChartType" ng-change="updateChartType(ChartType)">
-    <option value="line">line</option>
-    <option value="spline">spline</option>
-    <option value="area">area</option>
-    <option value="area-spline">area-spline</option>
-    <option value="scatter">scatter</option>
-    <option value="bar">bar</option>
-    <option value="donut">donut</option>
-    <option value="step">step</option>
-    <option value="area-step">area-step</option>
-  </select>
-  <select id="nodeSelect" ng-model="selectedNode" ng-change="nodeSelectChange(selectedNode)">
-    <option ng-repeat="(key,val) in nodes" value="{{key}}">{{val}}</option>
-  </select>
+
+    <div class="col-lg-6 col-md-12">
+      <leaflet center="center" markers="markers" defaults="defaults" width="90%" height="400" style="margin-left:"></leaflet>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-6">
+      <h3 class="graphTitle marketing">Volumetric Water Content</h3>
+      <angularchart dataset="thisVwc" schema="vwc_schema" options="vwc_options"></angularchart>
+      <div class="graphTitle">
+        <select id="ChartType" ng-model="ChartType" ng-change="updateChartType(ChartType)">
+          <option value="area-spline">area-spline</option>
+          <option value="donut">donut</option>
+        </select>
+      </div>
+    </div>
+
+  
 </div>
 
 <div class="row">
 
-  <div class="col-sm-12 col-md-6">
-    <h3 class="graphTitle marketing">Volumetric Water Content</h3>
-    <angularchart dataset="thisVwc" schema="vwc_schema" options="vwc_options"></angularchart>
-  </div>
+  <div class="col-lg-6 col-md-12">
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Node</th>
+            <th>Battery Status</th>
+            <th>Latitude</th>
+            <th>Longitude</th>
+          </tr>
+          <tbody>
+            <tr ng-repeat="node in nodeInfo">
+              <td>{{node["Name"]}}</td>
+              <td>{{node["Battery Status"]}}</td>
+              <td>{{node.Latitude}}</td>
+              <td>{{node.Longitude}}</td>
+            </tr>
+          </tbody>
+        </thead>
+      </table>
+    </div>
+  </div>  
 
   <div class="col-sm-12 col-md-6">
     <h3 class="marketing graphTitle">Soil Temperature</h3>
@@ -33,7 +52,7 @@
 <div class="row marketing graphTitle">
 
   <div class="col-lg-6 col-md-6 col-lg-offset-3 col-md-offset-3">
-    <h3>Sensor Status</h3>
+    <h3>Jeffrey!</h3>
   </div>
 
 </div>

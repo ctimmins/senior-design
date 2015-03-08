@@ -10,10 +10,11 @@
 angular.module('stemFireApp')
   .controller('MainCtrl', ['$scope', '$firebaseArray', 'nodeParsing', function ($scope, $firebaseArray, nodeParsing) {
 
-    //initial latitude and longitude coordinates
+    //initial latitude and longitude coordinates and node information
     var Latitude = 38.531869;
     var Longitude = -121.751864;
     $scope.markers = new Array();
+    $scope.nodeInfo = new Array()
 
     //$scope.soilSensors = fbutil.syncArray('1/soil sensors', {limitToLast: 100});
     var s_ref = new Firebase("https://agmon.firebaseio.com/soil sensors")
@@ -32,16 +33,17 @@ angular.module('stemFireApp')
         Latitude = info.$getRecord($scope.selectedNode)["Latitude"] | Latitude;
         Longitude = info.$getRecord($scope.selectedNode)["Longitude"] | Longitude;
         sensorInfo.forEach(function(obj) {
-          console.log(obj["Latitude"])
-          console.log(obj["Longitude"])
           $scope.markers.push({
             lat: obj["Latitude"],
             lng: obj["Longitude"],
-            message: obj["Name"]
+            message: obj["Name"],
+            riseOnHover: true
           });
+          $scope.nodeInfo.push(obj);
         });
-        
       });
+
+
     window.sensorInfo = sensorInfo;
     
     // NODE SELECTION AND DATA
@@ -82,7 +84,7 @@ angular.module('stemFireApp')
           $scope.thisVwc = $scope.vwc[node.key()];
           $scope.thisTemp = $scope.temperature[node.key()];
         }
-        //console.log(timeStamp);
+
       });
 
       //console.log('-------------------------');
@@ -130,9 +132,18 @@ angular.module('stemFireApp')
       defaults: {
         maxZoom: 19,
         minZoom: 15,
-        dragging: false
+        draggable: false
       } 
 
+    });
+
+    $scope.$on('leafletDirectiveMarker.click', function(e, args) {
+      var name = args.leafletEvent.target.options.message;
+      sensorInfo.forEach(function(obj) {
+        if (obj.Name == name) {
+          $scope.nodeSelectChange(obj.$id);
+        }
+      });
     });
 
     
