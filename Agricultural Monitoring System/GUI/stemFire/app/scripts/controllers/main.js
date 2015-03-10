@@ -161,9 +161,22 @@ angular.module('stemFireApp')
     }
 
     $scope.vwc_options = {
+      data: {
+        watchLimit: 5
+      },
       rows: [
         {
           key: '0',
+          axis: 'y',
+          type: 'area-spline'
+        },
+        {
+          key: '1',
+          axis: 'y',
+          type: 'area-spline'
+        },
+        {
+          key: '2',
           axis: 'y',
           type: 'area-spline'
         }
