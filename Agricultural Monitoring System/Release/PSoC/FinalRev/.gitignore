@@ -1,0 +1,4 @@
+#--PSoC--#
+#**.Bundle*/
+*.cydsn/Generated_Source/
+*.cydsn/CortexM3/
