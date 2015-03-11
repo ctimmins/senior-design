@@ -130,8 +130,8 @@ angular.module('stemFireApp')
         zoom: 17,
       },
       defaults: {
-        maxZoom: 19,
-        minZoom: 15,
+        maxZoom: 17,
+        minZoom: 17,
         draggable: false
       } 
 
@@ -150,7 +150,7 @@ angular.module('stemFireApp')
 
     // Angular Chart
 
-    $scope.ChartType = 'area-spline';
+    $scope.ChartType = 'donut';
 
     $scope.vwc_schema = {
       timeStamp: {
@@ -168,17 +168,17 @@ angular.module('stemFireApp')
         {
           key: '0',
           axis: 'y',
-          type: 'area-spline'
+          type: 'donut'
         },
         {
           key: '1',
           axis: 'y',
-          type: 'area-spline'
+          type: 'donut'
         },
         {
           key: '2',
           axis: 'y',
-          type: 'area-spline'
+          type: 'donut'
         }
       ],
 

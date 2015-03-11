@@ -1,54 +1,58 @@
 <div class="row" style="margin-top: 10px">
   <h1>Dashboard</h1>
+
+  <hr>
   
-  <div class="col-lg-6 col-md-12 col-sm-12">
-    <leaflet center="center" markers="markers" defaults="defaults" width="100%" height="500px" style="margin-left:"></leaflet>
+  <div class="col-lg-6 col-md-6 col-sm-12">
+    <leaflet center="center" markers="markers" defaults="defaults" width="100%" height="250px" style="margin-left:"></leaflet>
+    <div class="col-lg-12 col-md-12 col-sm-12">
+      <div class="table-responsive">
+        <table class="table table-striped table-hover table-condensed" style="text-align: left">
+          <thead>
+            <tr>
+              <th>Node</th>
+              <th>Battery Status</th>
+              <th>Latitude</th>
+              <th>Longitude</th>
+              <th>Samples Per Hour</th>
+            </tr>
+            <tbody>
+              <tr ng-repeat="node in nodeInfo">
+                <td>{{node["Name"]}}</td>
+                <td>{{node["Battery Status"]}}</td>
+                <td>{{node.Latitude}}</td>
+                <td>{{node.Longitude}}</td>
+                <td>{{node["Sample Rate"]}}</td>
+              </tr>
+            </tbody>
+          </thead>
+        </table>
+      </div>
+    </div> 
   </div>
   
-  <div class="col-lg-6 col-md-12 col-sm-12">
+  <div class="col-lg-6 col-md-6 col-sm-12 jumbotron">
     <h3 class="graphTitle">Volumetric Water Content</h3>
     <angularchart dataset="thisVwc" schema="vwc_schema" options="vwc_options"></angularchart>
     <div class="graphTitle">
-      <button type="button" class="btn btn-lg btn-primary" ng-click="updateChartType('donut')">Donut</button>
-      <button type="button" class="btn btn-lg btn-primary" ng-click="updateChartType('area-spline')">Area-Spline</button>
-      <!-- <select id="ChartType" ng-model="ChartType" ng-change="updateChartType(ChartType)">
-        <option value="area-spline">area-spline</option>
-        <option value="donut">donut</option>
-      </select> -->
+      <div class="btn-group btn-group-lg" role="group">
+        <button type="button" class="btn btn-lg btn-primary" ng-click="updateChartType('donut')">
+          <span class="glyphicon glyphicon-record" aria-hidden="true"></span> Donut
+        </button>
+        <button type="button" class="btn btn-lg btn-primary" ng-click="updateChartType('area-spline')">
+          <span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span> Spline
+        </button>
+      </div>
     </div>
   </div>
   
-  <div class="col-lg-6 col-lg-offset-6 col-md-12 col-sm-12">
+  <div class="col-lg-6 col-lg-offset-6 col-md-6 col-md-offset-6 col-sm-12 jumbotron">
     <h3 class="marketing graphTitle">Soil Temperature</h3>
     <!-- <angularchart dataset="thisTemp" schema="vwc_schema" options="vwc_options"></angularchart> -->
   </div>
 
-  <div class="col-lg-6 col-md-12">
-    <div class="table-responsive">
-      <table class="table table-striped table-hover table-condensed" style="text-align: left">
-        <thead>
-          <tr>
-            <th>Node</th>
-            <th>Battery Status</th>
-            <th>Latitude</th>
-            <th>Longitude</th>
-            <th>Samples Per Hour</th>
-          </tr>
-          <tbody>
-            <tr ng-repeat="node in nodeInfo">
-              <td>{{node["Name"]}}</td>
-              <td>{{node["Battery Status"]}}</td>
-              <td>{{node.Latitude}}</td>
-              <td>{{node.Longitude}}</td>
-              <td>{{node["Sample Rate"]}}</td>
-            </tr>
-          </tbody>
-        </thead>
-      </table>
-    </div>
-  </div>  
-
 </div>
+
 
 
 
