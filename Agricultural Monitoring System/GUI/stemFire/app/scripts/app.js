@@ -17,5 +17,5 @@ angular.module('stemFireApp', [
     'ngTouch',
     'firebase',
     'angularChart',
-    'leaflet-directive'
+    'leaflet-directive',
   ]);

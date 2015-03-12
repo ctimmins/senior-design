@@ -8,7 +8,7 @@
  * Controller of the stemFireApp
  */
 angular.module('stemFireApp')
-  .controller('MainCtrl', ['$scope', '$firebaseArray', 'nodeParsing', function ($scope, $firebaseArray, nodeParsing) {
+  .controller('MainCtrl', ['$scope', '$firebaseArray', 'weatherService', function ($scope, $firebaseArray, weatherService) {
 
     //initial latitude and longitude coordinates and node information
     var Latitude = 38.531869;
@@ -30,8 +30,8 @@ angular.module('stemFireApp')
     var sensorInfo = $firebaseArray(info_ref);
     sensorInfo.$loaded()
       .then(function(info) {
-        Latitude = info.$getRecord($scope.selectedNode)["Latitude"] | Latitude;
-        Longitude = info.$getRecord($scope.selectedNode)["Longitude"] | Longitude;
+        Latitude = info.$getRecord($scope.selectedNode)["Latitude"] || Latitude;
+        Longitude = info.$getRecord($scope.selectedNode)["Longitude"] || Longitude;
         sensorInfo.forEach(function(obj) {
           $scope.markers.push({
             lat: obj["Latitude"],
@@ -48,7 +48,7 @@ angular.module('stemFireApp')
     
     // NODE SELECTION AND DATA
     $scope.nodes = {}
-    $scope.selectedNode = 1;
+    $scope.selectedNode = 2;
 
     //Build data for graphs
     $scope.vwc = {};
@@ -146,6 +146,12 @@ angular.module('stemFireApp')
       });
     });
 
+    //Yahoo Weather
+    weatherService.byZip('95616').then(function(data) {
+      console.log('this weather:');
+      console.log(data);
+      $scope.local = data;
+;    });
     
 
     // Angular Chart
