@@ -32,11 +32,11 @@ Monitoring plant health and conserving water are two important considerations in
 
 The board in the field sends the captured data wirelessly to a coordinator which then uploads the data to a remote database.  From this point, growers can view the data using our web application on a computer or tablet.
 
-##Marketing Presentation
+##Marketing Video
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=embed/bQJXwqZNXdE"
-target="_blank"><img src="http://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg" 
-alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a>
+target="_blank"><img src="http://img.youtube.com/vi/bQJXwqZNXdE/0.jpg" 
+alt="Marketing Video" width="240" height="180" border="10" /></a>
 
 ##Features/Components
 ####PSoC5
