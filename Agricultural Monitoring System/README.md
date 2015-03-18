@@ -34,9 +34,7 @@ The board in the field sends the captured data wirelessly to a coordinator which
 
 ##Marketing Video
 
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=embed/bQJXwqZNXdE"
-target="_blank"><img src="http://img.youtube.com/vi/bQJXwqZNXdE/0.jpg" 
-alt="Marketing Video" width="240" height="180" border="10" /></a>
+<iframe src="https://docs.google.com/presentation/d/1wbcnrjsn4lwjHY33hAu_ieI2Ulm3Yo2k4nWNngOg5mc/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
 
 ##Features/Components
 ####PSoC5
