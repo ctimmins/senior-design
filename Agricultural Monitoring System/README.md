@@ -36,6 +36,8 @@ The board in the field sends the captured data wirelessly to a coordinator which
 
 [![STEM's Marketing Video](http://img.youtube.com/vi/bQJXwqZNXdE/0.jpg)](http://www.youtube.com/watch?v=bQJXwqZNXdE)
 
+##Drawings of Systems and Subsystems
+
 ##Features/Components
 ####PSoC5
 32 bit ARM Cortex M0 based programmable system on chip a.k.a. the brains of each node.
@@ -44,7 +46,7 @@ The multi-level installation of subterraneous sensors gives the user a soil mois
 ####Infrared Sensor
 The mounted infrared camera gives the user the ability to detect changes in leaf temperature as a function of time. This is used to determine when the stomates in the leaf closes in the day, which marks the point where the plant stops losing water.
 ####XBee Wireless Radio
-XBee radios are low energy, low bandwidth radios that have a range of around 300 feet
+XBee radios are low energy, low bandwidth radios that have a range of around 300 feet.
 ####Battery System
 The device is powered by a 2500 mAh Li-po battery. The battery can be recharged through an external solar panel or a USB phone charger. A analog to digital converter is placed to measure the health of the battery, thereby alerting the user that the battery is low.
 ####Low Power Consumption
