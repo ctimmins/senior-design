@@ -4,6 +4,7 @@
 
 - [System for Temperature and Evapotranspiration Monitoring (STEM)](#system-for-temperature-and-evapotranspiration-monitoring-stem)
   - [Abstract](#abstract)
+  - [Marketing Presentation](#marketing-presentation)
   - [Features/Components](#featurescomponents)
       - [PSoC5](#psoc5)
       - [Soil Sensors](#soil-sensors)
@@ -30,6 +31,9 @@
 Monitoring plant health and conserving water are two important considerations in regards to agriculture, especially given the current drought. Plants take in water through rainfall and regular watering and lose water through transpiration. If growers can quantify the amount of water that is available to the plant and how much the plant loses through transpiration, they can irrigate more efficiently. STEM accomplishes both of these goals by monitoring soil moisture and temperature at different depths in the ground around a plant.  STEM also observes the leaf temperature of the plant, which correlates to whether or not the stomata are opened or closed and thus whether or not water is evaporating from the leaves.
 
 The board in the field sends the captured data wirelessly to a coordinator which then uploads the data to a remote database.  From this point, growers can view the data using our web application on a computer or tablet.
+
+##Marketing Presentation
+<iframe src="https://docs.google.com/presentation/d/1wbcnrjsn4lwjHY33hAu_ieI2Ulm3Yo2k4nWNngOg5mc/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
 
 ##Features/Components
 ####PSoC5
