@@ -17,7 +17,7 @@ Monitoring plant health and conserving water are two important considerations in
 The board in the field sends the captured data wirelessly to a coordinator which then uploads the data to a remote database.  From this point, growers can view the data using our web application on a computer or tablet.
 
 ##Features/Components
-###PSoC4**
+###PSoC4
 32 bit ARM Cortex M0 based programmable system on chip a.k.a. the brains of each node
 * **Moisture Sensor** - Non-capacitive soil moisture sensor will give a moisture profile at 4 different soil depths per node
 * **Temperature Sensor** - Will give temperature profile of soil with at least 2 different depths
