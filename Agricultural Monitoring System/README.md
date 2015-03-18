@@ -34,7 +34,7 @@ The board in the field sends the captured data wirelessly to a coordinator which
 
 ##Marketing Video
 
-![alt-text](https://github.com/ctimmins/senior-design/blob/master/Agricultural%20Monitoring%20System/Documents%20&%20Examples/Marketing%20Presentation.pptx?raw=true)
+[![STEM's Marketing Video](http://img.youtube.com/vi/bQJXwqZNXdE/0.jpg)](http://www.youtube.com/watch?v=bQJXwqZNXdE)
 
 ##Features/Components
 ####PSoC5
