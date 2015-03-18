@@ -34,7 +34,18 @@ The board in the field sends the captured data wirelessly to a coordinator which
 
 ##Marketing Video
 
-<iframe src="https://docs.google.com/presentation/d/1wbcnrjsn4lwjHY33hAu_ieI2Ulm3Yo2k4nWNngOg5mc/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+
+<h2>Example of code</h2>
+<pre>
+    <div class="container">
+        <div class="block two first">
+            <h2>Your title</h2>
+            <div class="wrap">
+            //Your content
+            </div>
+        </div>
+    </div>
+</pre>
 
 ##Features/Components
 ####PSoC5
