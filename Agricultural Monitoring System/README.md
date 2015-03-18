@@ -4,7 +4,7 @@
 
 - [System for Temperature and Evapotranspiration Monitoring (STEM)](#system-for-temperature-and-evapotranspiration-monitoring-stem)
   - [Abstract](#abstract)
-  - [Marketing Presentation](#marketing-presentation)
+  - [Marketing Video](#marketing-video)
   - [Features/Components](#featurescomponents)
       - [PSoC5](#psoc5)
       - [Soil Sensors](#soil-sensors)
