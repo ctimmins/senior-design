@@ -1,3 +1,19 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [ui-date directive [![Build Status](https://travis-ci.org/angular-ui/ui-date.svg)](https://travis-ci.org/angular-ui/ui-date)](#ui-date-directive-build-statushttpstravis-ciorgangular-uiui-datesvghttpstravis-ciorgangular-uiui-date)
+- [Requirements](#requirements)
+- [Testing](#testing)
+- [Usage](#usage)
+  - [Options](#options)
+  - [Static Inline Picker](#static-inline-picker)
+  - [Working with ng-model](#working-with-ng-model)
+  - [ui-date-format directive](#ui-date-format-directive)
+  - [ng-required directive](#ng-required-directive)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # ui-date directive [![Build Status](https://travis-ci.org/angular-ui/ui-date.svg)](https://travis-ci.org/angular-ui/ui-date)
 
 This directive allows you to add a date-picker to your form elements.

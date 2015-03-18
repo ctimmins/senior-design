@@ -18,4 +18,5 @@ angular.module('stemFireApp', [
     'firebase',
     'angularChart',
     'leaflet-directive',
+    'picardy.fontawesome',
   ]);

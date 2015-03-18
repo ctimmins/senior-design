@@ -1,3 +1,18 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Data Logger for Moisture Sensors](#data-logger-for-moisture-sensors)
+  - [SDI-12 Communication](#sdi-12-communication)
+    - [Overview](#overview)
+    - [Advantages](#advantages)
+  - [DDI-Serial Communication](#ddi-serial-communication)
+    - [Overview](#overview-1)
+    - [Advantages](#advantages-1)
+  - [Generalized Schematic of Data Logger System](#generalized-schematic-of-data-logger-system)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 #Data Logger for Moisture Sensors
 
 ##SDI-12 Communication

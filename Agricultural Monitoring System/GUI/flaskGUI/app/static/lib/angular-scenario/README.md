@@ -1,3 +1,16 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [packaged angular-scenario](#packaged-angular-scenario)
+  - [Install](#install)
+    - [npm](#npm)
+    - [bower](#bower)
+  - [Documentation](#documentation)
+  - [License](#license)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # packaged angular-scenario
 
 This tool is now in maintenance mode. If you are starting a new project, please use
